@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const User = require("../models/user.model.js");
 
-const SECRET_KEY = process.env.JWT_SECRET_KEY;
+const ACCESS_TOKEN_SECRET = process.env.JWT_SECRET_KEY;
 
 async function basicAuth(req, res, next) {
     try {
@@ -10,7 +10,8 @@ async function basicAuth(req, res, next) {
             return res.status(401).json({ message: "No auth token provided" });
         }
         const token = authHeader.split(" ")[1];
-        const decoded = jwt.verify(token, SECRET_KEY);
+        const decoded = jwt.verify(token, ACCESS_TOKEN_SECRET);
+
         const user = await User.findById(decoded.userId).select("-password");
         if (!user) return res.status(401).json({ message: "User not found" });
 

@@ -8,7 +8,17 @@ const authRoute = require("./routes/auth.route");
 
 const app = express();
 
-app.use(cors({ origin: process.env.CORS_ORIGIN || true, credentials: true }));
+const ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://localhost:3001',
+    'https://shipster.se',
+    'https://app.shipster.se'
+];
+
+app.use(cors({
+    origin: ALLOWED_ORIGINS,
+    credentials: true
+}));
 app.use(express.json({ limit: "1mb" }));
 app.use(morgan("dev"));
 

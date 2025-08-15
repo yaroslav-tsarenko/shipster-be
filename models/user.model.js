@@ -5,21 +5,17 @@ const UserSchema = new mongoose.Schema(
         email: { type: String, required: true, unique: true, lowercase: true, trim: true },
         password: { type: String, required: true },
         role: { type: String, enum: ["customer", "carrier", "driver", "admin"], default: "customer" },
-
-        firstName: { type: String },
-        lastName: { type: String },
+        name: { type: String },
+        secondName: { type: String },
         phone: { type: String },
-
         companyName: { type: String },
         orgNumber: { type: String },
         vatNumber: { type: String },
         contactName: { type: String },
-
         address: { type: String },
         zip: { type: String },
         city: { type: String },
         country: { type: String },
-
         avatar: { type: String },
         notifications: {
             notificationsEnabled: { type: Boolean, default: false },
